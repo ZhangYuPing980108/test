@@ -74,9 +74,27 @@
       padding-left: 20px;
       margin: 0;
     }
+    .sound-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #f8fafc;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background 0.2s ease;
+    }
+    .sound-toggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
   </style>
 </head>
 <body>
+  <button class="sound-toggle" id="soundToggle" title="關閉/開啟音效">🔊</button>
   <div class="container">
     <h1>擲骰子遊戲</h1>
     <div class="dice" id="diceFace">🎲</div>
