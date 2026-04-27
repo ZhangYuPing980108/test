@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>擲骰子遊戲</title>
+  <style>
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      width: min(420px, 90%);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px);
+    }
+    h1 {
+      margin: 0 0 18px;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    .dice {
+      font-size: 6rem;
+      margin: 20px 0 10px;
+      line-height: 1;
+    }
+    .result {
+      font-size: 1.25rem;
+      margin: 0 0 20px;
+      min-height: 1.5em;
+    }
+    button {
+      background: #facc15;
+      color: #1f2937;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 26px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18);
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 24px rgba(0, 0, 0, 0.22);
+    }
+    .history {
+      margin-top: 24px;
+      text-align: left;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 16px;
+      border-radius: 16px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .history strong {
+      display: block;
+      margin-bottom: 10px;
+      color: #f8fafc;
+    }
+    .history ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>擲骰子遊戲</h1>
+    <div class="dice" id="diceFace">🎲</div>
+    <div class="result" id="resultText">按下按鈕開始擲骰子！</div>
+    <button id="rollButton">擲骰子</button>
+    <div class="history">
+      <strong>擲骰子紀錄</strong>
+      <ul id="historyList"></ul>
+    </div>
+  </div>
+  <script>
+    const diceFace = document.getElementById('diceFace');
+    const resultText = document.getElementById('resultText');
+    const rollButton = document.getElementById('rollButton');
+    const historyList = document.getElementById('historyList');
+
+    function rollDice() {
+      const value = Math.floor(Math.random() * 6) + 1;
+      const diceIcons = ['3B2', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+      const face = diceIcons[value];
+      diceFace.textContent = face;
+      resultText.textContent = `你擲出了 ${value} 點！`;
+
+      const entry = document.createElement('li');
+      const timestamp = new Date().toLocaleTimeString();
+      entry.textContent = `${timestamp} - ${value} 點`;
+      historyList.prepend(entry);
+
+      if (historyList.children.length > 6) {
+        historyList.removeChild(historyList.lastChild);
+      }
+    }
+
+    rollButton.addEventListener('click', rollDice);
+  </script>
+</body>
+</html>
